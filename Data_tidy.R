@@ -5,6 +5,7 @@ library(tidyverse)
 
 # Imprt data
 train = read.csv('train.csv')
+test = read.csv('test.csv')
 head(train)
 summary(train)
 
