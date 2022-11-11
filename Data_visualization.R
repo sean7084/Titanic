@@ -1,8 +1,12 @@
 # Libraries
 library(tidyverse)
 library(ggplot2)
+library(PerformanceAnalytics)
 
-plot(train)
+chart.Correlation(train.numeric,
+                  method="spearman",
+                  histogram=TRUE,
+                  pch=16)
 
 train$Survived = as.factor(train$Survived)
 ggplot(train) +

@@ -24,7 +24,7 @@ test$survival_rate = train_lm_alt$coefficients['(Intercept)']+
                      test$SibSp * train_lm_alt$coefficients['SibSp']
 test$Survived = ifelse(test$survival_rate>.5,1,0)
 
-# Replace NAs with random binomial values with p = Overall survival rate
+# Replace NAs with random binomial values with p = Overall survival rate = .3838
 summary(train$Survived)
 test$Survived = ifelse(is.na(test$survival_rate) == T,rbinom(n=1,size=1,prob=.3838),test$Survived)
 

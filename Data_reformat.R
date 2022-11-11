@@ -6,7 +6,12 @@ library(ggpubr)
 
 # Imprt data
 train = read.csv('train.csv')
+train.omit = na.omit(train)
 test = read.csv('test.csv')
+
+# Numeric data
+train.numeric = train.omit %>% select(Survived,Pclass,Age,SibSp,Parch,Fare)
+summary(train.numeric)
 
 # Summary
 head(train)

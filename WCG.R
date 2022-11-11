@@ -1,8 +1,10 @@
 # Create age & sex groups: young men, young women, married men, married women
 # Inspired by WCG model
+library(rstatix)
+library(tidyverse)
 
+# Categorize the groups using names only
 train$agesexgroup = rep(NA,nrow(train))
-
 for (i in 1:nrow(train)){
   if (grepl('Mr',train$Name[i])){
     train$agesexgroup[i] = 'married man'
@@ -10,6 +12,10 @@ for (i in 1:nrow(train)){
     train$agesexgroup[i] = 'young woman'
   } else if (grepl('Master',train$Name[i])){
     train$agesexgroup[i] = 'young man'
+  } else if (grepl('Rev',train$Name[i])){
+    train$agesexgroup[i] = 'priest'
+  } else if (grepl('Rev',train$Name[i])){
+    train$agesexgroup[i] = 'priest'
   } else if (grepl('Rev',train$Name[i])){
     train$agesexgroup[i] = 'priest'
   }
