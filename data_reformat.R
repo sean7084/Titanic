@@ -12,14 +12,14 @@ test = read.csv('test.csv')
 head(train)
 summary(train)
 
-# List cateogorical data into factors.
+# List categorical data into factors.
 train$Sex = as.factor(train$Sex)
 train$Survived = as.factor(train$Survived)
 train$PassengerId = as.factor(train$PassengerId)
 train$Pclass = as.factor(train$Pclass)
 train$Embarked = as.factor(train$Embarked)
 
-# Check normaility of numerical data
+# Check normality of numerical data
 shapiro.test(train$Age)
 shapiro.test(train$SibSp)
 shapiro.test(train$Parch)
