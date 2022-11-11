@@ -1,8 +1,15 @@
 # Library
 library(tidyverse)
 
+# List factors into numeric variables for linear regression
+train$Sex = as.character(train$Sex)
+train$Survived = as.numeric(train$Survived)
+train$PassengerId = as.numeric(train$PassengerId)
+train$Pclass = as.numeric(train$Pclass)
+train$Embarked = as.character(train$Embarked)
+
 # Initial linear model
-train_lm = lm(Survived~.,data = select(train,-c(Name,Ticket,Cabin)))
+train_lm = lm(Survived~.,data = select(train,-c(PassengerId,Name,Ticket,Cabin)))
 summary(train_lm)
 
 # Linear model after removing non-significant IVs

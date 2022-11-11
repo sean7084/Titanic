@@ -13,12 +13,21 @@ head(train)
 summary(train)
 
 # List cateogorical data into factors.
-as.factor
+train$Sex = as.factor(train$Sex)
+train$Survived = as.factor(train$Survived)
+train$PassengerId = as.factor(train$PassengerId)
+train$Pclass = as.factor(train$Pclass)
+train$Embarked = as.factor(train$Embarked)
 
 # Check normaility of numerical data
-
+shapiro.test(train$Age)
+shapiro.test(train$SibSp)
+shapiro.test(train$Parch)
+shapiro.test(train$Fare)
 
 # Create a column for last name
+train$LastName = gsub("^(.*?),.*", "\\1", train$Name)
+#str_extract(train$Name,"(\\w+)") cannot extract first name like O'Really
 
 # Create cabin area column
-
+train$cabin_code = substr(train$Cabin,1,1)
