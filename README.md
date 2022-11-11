@@ -10,3 +10,5 @@ score of 0.64114.
 2.1 attempt used women children group (WCG) as the only predictor. People are identified through their names only. Simply categorizing 
 adult man as dead would give us a score of 0.75119, which is better than the last attempt. It shows choosing a better predictor is more
 useful than better methods or using wide arrange of predictors.
+
+The third attempt using kNN failed due to too many NAs in the test dataset (100/418). Can only reach 0.64 after the run.
