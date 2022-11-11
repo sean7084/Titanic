@@ -46,7 +46,7 @@ for (i in 1:nrow(test)){
 # Output the result into .csv file for submission
 write.csv(select(test,c(PassengerId,Survived)),'~/Dropbox/R/Titanic/test_wcg_1.csv',row.names = F)
 
-# Attempt 2: A
+# Attempt 2: 
 
 
 
