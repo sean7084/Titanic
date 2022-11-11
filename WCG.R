@@ -25,8 +25,9 @@ for (i in 1:nrow(train)){
 }
 
 train$agesexgroup = as.factor(train$agesexgroup)
-train %>% group_by(Survived,agesexgroup) %>% summarize(n=n()) 
+train %>% group_by(Survived,agesexgroup) %>% summarize(n=n()) %>% mutate(freq = n / sum(n))
 
+train$Survived = as.factor(train$Survived)
 ggplot(train, na.rm=T) +
   geom_bar(mapping = aes(agesexgroup, fill=Survived))
 
@@ -46,7 +47,7 @@ for (i in 1:nrow(test)){
     test$Survived[i] = rbinom(1,1,.5)
   }
   if (grepl('Mrs',test$Name[i])){
-    test$Survived[i] = 0 
+    test$Survived[i] = 1 
   }
 }
 # Output the result into .csv file for submission

@@ -8,10 +8,10 @@ library(ggpubr)
 train = read.csv('train.csv')
 train.omit = na.omit(train)
 test = read.csv('test.csv')
+test.omit = na.omit(test)
 
 # Numeric data
-train.numeric = train.omit %>% select(Survived,Pclass,Age,SibSp,Parch,Fare)
-summary(train.numeric)
+train.numeric = train %>% select(Survived,Pclass,Age,SibSp,Parch,Fare)
 
 # Summary
 head(train)
@@ -26,9 +26,15 @@ train$Embarked = as.factor(train$Embarked)
 
 # Check normality of numerical data
 shapiro.test(train$Age)
-shapiro.test(train$SibSp)
-shapiro.test(train$Parch)
 shapiro.test(train$Fare)
+train$Age.scaled = train %>% select(Age) %>% scale()
+train$Fare.scaled = train %>% select(Fare) %>% scale()
+train$Fare.scaled = log(train$Fare)
+train$Age.scaled = log(train$Age)
+
+hist(train$Fare)
+hist(train$Fare.scaled)
+shapiro.test(train$Age.scaled)
 
 # Create a column for last name
 train$LastName = gsub("^(.*?),.*", "\\1", train$Name)
