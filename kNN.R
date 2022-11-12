@@ -1,4 +1,5 @@
 library(class)
+library(tidyverse)
 
 train.numeric = train.omit %>% select(PassengerId,Pclass,Age,SibSp,Parch,Fare)
 class(train.omit)
@@ -24,7 +25,7 @@ test.numeric$Age.scaled = log(test.numeric$Age)
 test.numeric.scaled = test.numeric %>% select(PassengerId,Pclass,Age.scaled,SibSp,Parch,Fare.scaled)
 
 k = sqrt(nrow(train))
-Survived <- knn(as.matrix(train.numeric.scaled[,2:5]), as.matrix(test.numeric.scaled[,2:5]), as.matrix(train.survived), round(k))
-test.numeric.scaled <- cbind(test.numeric.scaled,Survived) 
+Survived = knn(as.matrix(train.numeric.scaled[,2:5]), as.matrix(test.numeric.scaled[,2:5]), as.matrix(train.survived), round(k))
+test.numeric.scaled = cbind(test.numeric.scaled,Survived) 
 
-write.csv(select(test,c(PassengerId,Survived)),'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
+write.csv(select(test.numeric.scaled,c(PassengerId,Survived)),'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
