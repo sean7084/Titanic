@@ -29,5 +29,28 @@ Survived = knn(as.matrix(train.numeric.scaled[,2:5]), as.matrix(test.numeric.sca
 test.numeric.scaled = cbind(test.numeric.scaled,Survived) 
 test.numeric.scaled = test.numeric.scaled %>% 
                       complete(PassengerId = first(PassengerId):1309)
+test.knn = select(test.numeric.scaled,c(PassengerId,Survived))
 
-write.csv(select(test.numeric.scaled,c(PassengerId,Survived)),'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
+# Replace NAs with nearby values
+test.knn.na = test.knn %>% fill(Survived)
+
+test.knn$Survived = as.numeric(test.knn$Survived)
+
+for (i in 1:nrow(test.knn)){
+  if(is.na(test.knn$Survived[i]) == T){
+    test.knn$Survived[i] = rbinom(n=1,size=1,prob=.3838)
+  }
+  else if(test.knn$Survived[i] == 1){
+    test.knn$Survived[i] = 0
+    } 
+  else if(test.knn$Survived[i] == 2){
+    test.knn$Survived[i] = 1
+    } 
+}
+
+test.knn.na2 = test.knn %>% replace_na(list())
+str(test.knn)
+
+write.csv(test.knn,'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
+write.csv(test.knn.na,'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
+write.csv(test.knn.na2,'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
