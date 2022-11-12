@@ -27,5 +27,7 @@ test.numeric.scaled = test.numeric %>% select(PassengerId,Pclass,Age.scaled,SibS
 k = sqrt(nrow(train))
 Survived = knn(as.matrix(train.numeric.scaled[,2:5]), as.matrix(test.numeric.scaled[,2:5]), as.matrix(train.survived), round(k))
 test.numeric.scaled = cbind(test.numeric.scaled,Survived) 
+test.numeric.scaled = test.numeric.scaled %>% 
+                      complete(PassengerId = first(PassengerId):1309)
 
 write.csv(select(test.numeric.scaled,c(PassengerId,Survived)),'~/Dropbox/R/Titanic/test_knn.csv',row.names = F)
