@@ -34,8 +34,8 @@ test.knn = select(test.numeric.scaled,c(PassengerId,Survived))
 # Replace NAs with nearby values
 test.knn.na = test.knn %>% fill(Survived)
 
+# Replace NAs with p=.3838
 test.knn$Survived = as.numeric(test.knn$Survived)
-
 for (i in 1:nrow(test.knn)){
   if(is.na(test.knn$Survived[i]) == T){
     test.knn$Survived[i] = rbinom(n=1,size=1,prob=.3838)
