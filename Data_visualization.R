@@ -15,3 +15,6 @@ ggplot(train) +
   geom_bar(mapping = aes(cabin_code, fill=Survived))
 ggplot(train) +
   geom_bar(mapping = aes(agesexgroup, fill=Survived))
+
+
+# age+parent/child+embarked+fare 
