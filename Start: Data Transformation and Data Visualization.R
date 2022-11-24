@@ -1,4 +1,4 @@
-setwd('~/Dropbox/R/Titanic')
+setwd('~/Documents/DB/Dropbox/R/Titanic')
 
 # Libraries
 library(tidyverse)
@@ -42,3 +42,24 @@ train$LastName = gsub("^(.*?),.*", "\\1", train$Name)
 
 # Create cabin area column
 train$cabin_code = substr(train$Cabin,1,1)
+
+# Libraries
+library(tidyverse)
+library(ggplot2)
+library(PerformanceAnalytics)
+
+chart.Correlation(train.numeric,
+                  method="spearman",
+                  histogram=TRUE,
+                  pch=16)
+
+train$Survived = as.factor(train$Survived)
+ggplot(train) +
+  geom_bar(mapping = aes(Sex, fill=Survived))
+ggplot(train) +
+  geom_bar(mapping = aes(cabin_code, fill=Survived))
+ggplot(train) +
+  geom_bar(mapping = aes(agesexgroup, fill=Survived))
+
+
+# age+parent/child+embarked+fare 
