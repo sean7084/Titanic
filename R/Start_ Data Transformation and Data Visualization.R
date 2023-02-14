@@ -1,4 +1,4 @@
-setwd('~/Documents/DB/Dropbox/R/Titanic')
+setwd('~/Code/Titanic/R')
 
 # Libraries
 library(tidyverse)
